@@ -205,7 +205,7 @@ class Underscores_Generator_Plugin {
 
 		// Special treatment for footer.php
 		if ( 'footer.php' == $filename ) {
-			// <?php printf( __( 'Theme: %1$s by %2$s.', '_s' ), '_s', '<a href="http://automattic.com/" rel="designer">Automattic</a>' );
+			// <?php printf( __( 'Theme: %1$s by %2$s.', lumin ), lumin, '<a href="http://automattic.com/" rel="designer">Automattic</a>' );
 			$contents = str_replace( 'http://automattic.com/', esc_url( $this->theme['author_uri'] ), $contents );
 			$contents = str_replace( 'Automattic', $this->theme['author'], $contents );
 			$contents = preg_replace( "#printf\\((\\s?__\\(\\s?'Theme:[^,]+,[^,]+,)([^,]+),#", sprintf( "printf(\\1 '%s',", esc_attr( $this->theme['name'] ) ), $contents );
@@ -217,7 +217,7 @@ class Underscores_Generator_Plugin {
 		// Regular treatment for all other files.
 		$contents = str_replace( "@package _s", sprintf( "@package %s", str_replace( ' ', '_', $this->theme['name'] ) ), $contents ); // Package declaration.
 		$contents = str_replace( "_s-", sprintf( "%s-",  $this->theme['slug'] ), $contents ); // Script/style handles.
-		$contents = str_replace( "'_s'", sprintf( "'%s'",  $this->theme['slug'] ), $contents ); // Textdomains.
+		$contents = str_replace( "lumin", sprintf( "'%s'",  $this->theme['slug'] ), $contents ); // Textdomains.
 		$contents = str_replace( "_s_", $slug . '_', $contents ); // Function names.
 		$contents = preg_replace( '/\b_s\b/', $this->theme['name'], $contents );
 		return $contents;
